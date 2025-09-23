@@ -42,6 +42,11 @@ public class Conexion {
             return "Error de conexión: " + e.getMessage();
         }
     }
+
+    /* Metodo para main para probar la conexion */
+    public static void main(String[] args) {
+        System.out.println(probarConexion());
+    }
 }
 
 
