@@ -5,7 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "prueba de conexion entre ambas computadoras" %>
+<h1><%= "prueba de conexion entre ambas computadoras de Edwin y Anderson" %>
 </h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
