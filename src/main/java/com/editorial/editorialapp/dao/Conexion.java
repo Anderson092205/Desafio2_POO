@@ -8,18 +8,19 @@ public class Conexion {
 
     /**
      * Establece y retorna una conexión activa a la base de datos MySQL.
-     * si la conexión es exitosa.
-     *  si ocurre un error al conectar. dira error
+     * Utiliza el usuario 'editorial' con contraseña 'editorial123' y se conecta a la base 'elotrolado'.
+     * Si la conexión es exitosa, retorna el objeto Connection.
+     * Si ocurre un error, lanza una excepción con el mensaje correspondiente.
      */
     public static Connection getConnection() {
         try {
-            // Carga el driver JDBC de MySQL
+            // Carga el driver JDBC de MySQL (versión moderna)
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Retorna la conexión usando URL, usuario y contraseña
+            // Retorna la conexión usando URL, usuario y contraseña definidos
             return DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/editorialdb",
-                    "root", "" // Usuario root sin contraseña
+                    "jdbc:mysql://localhost:3306/editorialdb?allowPublicKeyRetrieval=true&useSSL=false",
+                    "editorweb", "editorweb123"              // Usuario y contraseña configurados en phpMyAdmin
             );
         } catch (Exception e) {
             // Si ocurre un error, se lanza una excepción con el mensaje detallado
@@ -30,7 +31,7 @@ public class Conexion {
     /**
      * Método auxiliar para validar la conexión desde una página JSP.
      * Retorna un mensaje indicando si la conexión fue exitosa o si hubo error.
-     * devuelve "Conexión exitosa" o el mensaje de error.
+     * Devuelve "Conexión exitosa" o el mensaje de error generado.
      */
     public static String probarConexion() {
         try (Connection con = getConnection()) {
@@ -42,6 +43,7 @@ public class Conexion {
         }
     }
 }
+
 
 
 
