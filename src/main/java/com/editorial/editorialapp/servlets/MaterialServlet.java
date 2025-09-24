@@ -28,7 +28,7 @@ public class MaterialServlet extends HttpServlet {
             if ("listar".equals(action)) {
                 List<Material> materiales = materialDAO.listar();
                 request.setAttribute("materiales", materiales);
-                request.getRequestDispatcher("/material/listar.jsp").forward(request, response);
+                request.getRequestDispatcher("/Material/listar.jsp").forward(request, response);
 
             } else if ("editar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -38,7 +38,7 @@ public class MaterialServlet extends HttpServlet {
                 request.setAttribute("material", material);
                 request.setAttribute("categorias", categorias);
                 request.setAttribute("autores", autores);
-                request.getRequestDispatcher("/material/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Material/formulario.jsp").forward(request, response);
 
             } else if ("eliminar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -51,7 +51,7 @@ public class MaterialServlet extends HttpServlet {
                 request.setAttribute("material", new Material());
                 request.setAttribute("categorias", categorias);
                 request.setAttribute("autores", autores);
-                request.getRequestDispatcher("/material/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Material/formulario.jsp").forward(request, response);
 
             } else {
                 response.sendRedirect("MaterialServlet?action=listar");
@@ -98,7 +98,7 @@ public class MaterialServlet extends HttpServlet {
             request.setAttribute("material", material);
             request.setAttribute("categorias", categoriaDAO.listar());
             request.setAttribute("autores", autorDAO.listar());
-            request.getRequestDispatcher("/material/formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Material/formulario.jsp").forward(request, response);
         }
     }
 }

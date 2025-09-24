@@ -20,13 +20,13 @@ public class AutorServlet extends HttpServlet {
         try {
             if ("listar".equals(action)) {
                 request.setAttribute("autores", autorDAO.listar());
-                request.getRequestDispatcher("/autores/listar.jsp").forward(request, response);
+                request.getRequestDispatcher("/Autores/listar.jsp").forward(request, response);
 
             } else if ("editar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Autor autor = autorDAO.obtenerPorId(id);
                 request.setAttribute("autor", autor);
-                request.getRequestDispatcher("/autores/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);
 
             } else if ("eliminar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -35,7 +35,7 @@ public class AutorServlet extends HttpServlet {
 
             } else if ("nuevo".equals(action)) {
                 request.setAttribute("autor", new Autor());
-                request.getRequestDispatcher("/autores/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);
 
             } else {
                 response.sendRedirect("AutorServlet?action=listar");

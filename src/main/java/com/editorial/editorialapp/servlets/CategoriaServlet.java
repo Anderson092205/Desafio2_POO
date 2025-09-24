@@ -20,13 +20,13 @@ public class CategoriaServlet extends HttpServlet {
         try {
             if ("listar".equals(action)) {
                 request.setAttribute("categorias", categoriaDAO.listar());
-                request.getRequestDispatcher("/categoria/listar.jsp").forward(request, response);
+                request.getRequestDispatcher("/Categoria/listar.jsp").forward(request, response);
 
             } else if ("editar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Categoria categoria = categoriaDAO.obtenerPorId(id);
                 request.setAttribute("categoria", categoria);
-                request.getRequestDispatcher("/categoria/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Categoria/formulario.jsp").forward(request, response);
 
             } else if ("eliminar".equals(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -56,7 +56,7 @@ public class CategoriaServlet extends HttpServlet {
             categoria.setNombre(nombre);
             request.setAttribute("error", "El nombre es obligatorio.");
             request.setAttribute("categoria", categoria);
-            request.getRequestDispatcher("/categoria/formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Categoria/formulario.jsp").forward(request, response);
             return;
         }
 
@@ -74,7 +74,7 @@ public class CategoriaServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("error", "Error: " + e.getMessage());
             request.setAttribute("categoria", categoria);
-            request.getRequestDispatcher("/categoria/formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Categoria/formulario.jsp").forward(request, response);
         }
     }
 }
