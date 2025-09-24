@@ -58,7 +58,7 @@ public class AutorServlet extends HttpServlet {
             autor.setNacionalidad(nacionalidad);
             request.setAttribute("error", "Todos los campos son obligatorios.");
             request.setAttribute("autor", autor);
-            request.getRequestDispatcher("/autores/formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);
             return;
         }
 
@@ -77,7 +77,7 @@ public class AutorServlet extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("error", "Error: " + e.getMessage());
             request.setAttribute("autor", autor);
-            request.getRequestDispatcher("/autores/formulario.jsp").forward(request, response);
+            request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);
         }
     }
 }
