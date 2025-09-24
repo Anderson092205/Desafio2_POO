@@ -1,23 +1,82 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.editorial.editorialapp.dao.Conexion" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gestión Editorial</title>
+    <title>EditorialApp - Inicio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #34495e;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1abc9c;
+        }
+
+        main {
+            text-align: center;
+            padding: 40px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<h1>Prueba de conexión entre Edwin y Anderson</h1>
 
-<p><strong>Estado de la base de datos:</strong>
-    <%= Conexion.probarConexion() %>
-</p>
+<header>
+    <h1>EditorialApp</h1>
+    <p>Panel principal de gestión</p>
+</header>
 
-<hr>
+<nav>
+    <a href="CategoriaServlet?action=listar">Categorías</a>
+    <a href="AutorServlet?action=listar">Autores</a>
+    <a href="MaterialServlet?action=listar">Materiales</a>
+</nav>
 
-<ul>
-    <li><a href="categorias/listar.jsp">Gestionar Categorías</a></li>
-    <li><a href="autores/listar.jsp">Gestionar Autores</a></li>
-    <li><a href="materiales/listar.jsp">Gestionar Materiales</a></li>
-</ul>
+<main>
+    <h2>Bienvenido</h2>
+    <p>Selecciona una sección del menú para comenzar a gestionar los contenidos editoriales.</p>
+</main>
+
+<footer>
+    &copy; 2025 EditorialApp. Todos los derechos reservados.
+</footer>
+
 </body>
 </html>
+
