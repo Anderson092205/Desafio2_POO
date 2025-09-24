@@ -41,6 +41,7 @@ public class AutorServlet extends HttpServlet {
                 response.sendRedirect("AutorServlet?action=listar");
             }
         } catch (Exception e) {
+            System.out.println("❌ Error en doGet: " + e.getMessage());
             request.setAttribute("error", "Error: " + e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
@@ -52,29 +53,31 @@ public class AutorServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String nacionalidad = request.getParameter("nacionalidad");
 
+        System.out.println("🟡 POST recibido: nombre = " + nombre + ", nacionalidad = " + nacionalidad + ", id = " + idStr);
+
+        Autor autor = new Autor();
+        autor.setNombre(nombre);
+        autor.setNacionalidad(nacionalidad);
+
         if (nombre == null || nombre.trim().isEmpty() || nacionalidad == null || nacionalidad.trim().isEmpty()) {
-            Autor autor = new Autor();
-            autor.setNombre(nombre);
-            autor.setNacionalidad(nacionalidad);
             request.setAttribute("error", "Todos los campos son obligatorios.");
             request.setAttribute("autor", autor);
             request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);
             return;
         }
 
-        Autor autor = new Autor();
-        autor.setNombre(nombre);
-        autor.setNacionalidad(nacionalidad);
-
         try {
-            if (idStr == null || idStr.isEmpty()) {
+            if (idStr == null || idStr.trim().isEmpty()) {
+                System.out.println("🟢 Insertando nuevo autor...");
                 autorDAO.insertar(autor);
             } else {
                 autor.setId(Integer.parseInt(idStr));
+                System.out.println("🟢 Actualizando autor ID: " + autor.getId());
                 autorDAO.actualizar(autor);
             }
             response.sendRedirect("AutorServlet?action=listar");
         } catch (Exception e) {
+            System.out.println("❌ Error en doPost: " + e.getMessage());
             request.setAttribute("error", "Error: " + e.getMessage());
             request.setAttribute("autor", autor);
             request.getRequestDispatcher("/Autores/formulario.jsp").forward(request, response);

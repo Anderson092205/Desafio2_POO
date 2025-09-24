@@ -28,25 +28,6 @@ public class Conexion {
         }
     }
 
-    /**
-     * Método auxiliar para validar la conexión desde una página JSP.
-     * Retorna un mensaje indicando si la conexión fue exitosa o si hubo error.
-     * Devuelve "Conexión exitosa" o el mensaje de error generado.
-     */
-    public static String probarConexion() {
-        try (Connection con = getConnection()) {
-            // Si la conexión se abre correctamente, se retorna el mensaje de éxito
-            return "Conexión exitosa";
-        } catch (Exception e) {
-            // Si falla, se retorna el mensaje de error para mostrar en la interfaz
-            return "Error de conexión: " + e.getMessage();
-        }
-    }
-
-    /* Metodo para main para probar la conexion */
-    public static void main(String[] args) {
-        System.out.println(probarConexion());
-    }
 }
 
 

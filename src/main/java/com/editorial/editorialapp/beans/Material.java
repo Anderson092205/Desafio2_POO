@@ -1,7 +1,7 @@
 package com.editorial.editorialapp.beans;
 
 public class Material {
-    private int id;
+    private Integer id; // ← ahora puede ser null para nuevos registros
     private String titulo;
     private String tipo; // Libro o Revista
     private Categoria categoria;
@@ -9,7 +9,7 @@ public class Material {
 
     public Material() {}
 
-    public Material(int id, String titulo, String tipo, Categoria categoria, Autor autor) {
+    public Material(Integer id, String titulo, String tipo, Categoria categoria, Autor autor) {
         this.id = id;
         this.titulo = titulo;
         this.tipo = tipo;
@@ -17,18 +17,43 @@ public class Material {
         this.autor = autor;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public Integer getId() {
+        return id;
+    }
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getTitulo() {
+        return titulo;
+    }
 
-    public Categoria getCategoria() { return categoria; }
-    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-    public Autor getAutor() { return autor; }
-    public void setAutor(Autor autor) { this.autor = autor; }
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
 }

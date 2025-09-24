@@ -28,9 +28,20 @@ public class CategoriaDAO {
         String sql = "INSERT INTO categoria(nombre) VALUES(?)";
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
+
+            System.out.println("🟡 Ejecutando INSERT con nombre = " + c.getNombre());
+
             ps.setString(1, c.getNombre());
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("✅ Categoría insertada correctamente.");
+            } else {
+                System.out.println("⚠️ No se insertó ninguna fila.");
+            }
+
         } catch (Exception e) {
+            System.out.println("❌ Error al insertar categoría: " + e.getMessage());
             e.printStackTrace();
         }
     }

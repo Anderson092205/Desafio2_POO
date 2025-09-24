@@ -57,6 +57,7 @@ public class MaterialServlet extends HttpServlet {
                 response.sendRedirect("MaterialServlet?action=listar");
             }
         } catch (Exception e) {
+            System.out.println("❌ Error en doGet: " + e.getMessage());
             request.setAttribute("error", "Error: " + e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
@@ -67,6 +68,8 @@ public class MaterialServlet extends HttpServlet {
         String idStr = request.getParameter("id");
         String titulo = request.getParameter("titulo");
         String tipo = request.getParameter("tipo");
+
+        System.out.println("🟡 POST recibido: titulo = " + titulo + ", tipo = " + tipo + ", id = " + idStr);
 
         try {
             int idCategoria = Integer.parseInt(request.getParameter("id_categoria"));
@@ -81,16 +84,19 @@ public class MaterialServlet extends HttpServlet {
             material.setCategoria(categoria);
             material.setAutor(autor);
 
-            if (idStr == null || idStr.isEmpty()) {
+            if (idStr == null || idStr.trim().isEmpty()) {
+                System.out.println("🟢 Insertando nuevo material...");
                 materialDAO.insertar(material);
             } else {
                 material.setId(Integer.parseInt(idStr));
+                System.out.println("🟢 Actualizando material ID: " + material.getId());
                 materialDAO.actualizar(material);
             }
 
             response.sendRedirect("MaterialServlet?action=listar");
 
         } catch (Exception e) {
+            System.out.println("❌ Error en doPost: " + e.getMessage());
             Material material = new Material();
             material.setTitulo(titulo);
             material.setTipo(tipo);

@@ -39,6 +39,7 @@ public class MaterialDAO {
             }
 
         } catch (Exception e) {
+            System.out.println("❌ Error al listar materiales: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -68,6 +69,7 @@ public class MaterialDAO {
             }
 
         } catch (Exception e) {
+            System.out.println("❌ Error al obtener material por ID: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -80,13 +82,21 @@ public class MaterialDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Insertando material: " + m.getTitulo() + " (" + m.getTipo() + ")");
             ps.setString(1, m.getTitulo());
             ps.setString(2, m.getTipo());
             ps.setInt(3, m.getCategoria().getId());
             ps.setInt(4, m.getAutor().getId());
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("✅ Material insertado correctamente.");
+            } else {
+                System.out.println("⚠️ No se insertó ninguna fila.");
+            }
 
         } catch (Exception e) {
+            System.out.println("❌ Error al insertar material: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -97,6 +107,7 @@ public class MaterialDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Actualizando material ID: " + m.getId());
             ps.setString(1, m.getTitulo());
             ps.setString(2, m.getTipo());
             ps.setInt(3, m.getCategoria().getId());
@@ -105,6 +116,7 @@ public class MaterialDAO {
             ps.executeUpdate();
 
         } catch (Exception e) {
+            System.out.println("❌ Error al actualizar material: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -115,10 +127,12 @@ public class MaterialDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Eliminando material ID: " + id);
             ps.setInt(1, id);
             ps.executeUpdate();
 
         } catch (Exception e) {
+            System.out.println("❌ Error al eliminar material: " + e.getMessage());
             e.printStackTrace();
         }
     }

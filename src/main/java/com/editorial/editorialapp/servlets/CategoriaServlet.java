@@ -51,20 +51,18 @@ public class CategoriaServlet extends HttpServlet {
         String idStr = request.getParameter("id");
         String nombre = request.getParameter("nombre");
 
+        Categoria categoria = new Categoria();
+        categoria.setNombre(nombre);
+
         if (nombre == null || nombre.trim().isEmpty()) {
-            Categoria categoria = new Categoria();
-            categoria.setNombre(nombre);
             request.setAttribute("error", "El nombre es obligatorio.");
             request.setAttribute("categoria", categoria);
             request.getRequestDispatcher("/Categoria/formulario.jsp").forward(request, response);
             return;
         }
 
-        Categoria categoria = new Categoria();
-        categoria.setNombre(nombre);
-
         try {
-            if (idStr == null || idStr.isEmpty()) {
+            if (idStr == null || idStr.trim().isEmpty()) {
                 categoriaDAO.insertar(categoria);
             } else {
                 categoria.setId(Integer.parseInt(idStr));

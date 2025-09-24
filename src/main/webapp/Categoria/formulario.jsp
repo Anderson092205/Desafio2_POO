@@ -67,7 +67,9 @@
     </c:if>
 
     <form action="CategoriaServlet" method="post">
-        <input type="hidden" name="id" value="${categoria.id}">
+        <c:if test="${not empty categoria.id}">
+            <input type="hidden" name="id" value="${categoria.id}">
+        </c:if>
 
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="${categoria.nombre}" required>

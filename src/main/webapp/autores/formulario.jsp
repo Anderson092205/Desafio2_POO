@@ -43,17 +43,24 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        input[type="submit"] {
+        .botones {
             margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="submit"], .cancelar {
             background-color: #2980b9;
             color: white;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
             border-radius: 4px;
-            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            flex: 1;
+            margin: 0 5px;
         }
-        input[type="submit"]:hover {
+        input[type="submit"]:hover, .cancelar:hover {
             background-color: #1abc9c;
         }
     </style>
@@ -67,7 +74,9 @@
     </c:if>
 
     <form action="AutorServlet" method="post">
-        <input type="hidden" name="id" value="${autor.id}">
+        <c:if test="${not empty autor.id}">
+            <input type="hidden" name="id" value="${autor.id}">
+        </c:if>
 
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="${autor.nombre}" required>
@@ -75,8 +84,12 @@
         <label for="nacionalidad">Nacionalidad:</label>
         <input type="text" name="nacionalidad" id="nacionalidad" value="${autor.nacionalidad}" required>
 
-        <input type="submit" value="Guardar">
+        <div class="botones">
+            <input type="submit" value="Guardar">
+            <a href="AutorServlet?action=listar" class="cancelar">Cancelar</a>
+        </div>
     </form>
 </div>
 </body>
 </html>
+

@@ -65,7 +65,9 @@
 </c:if>
 
 <form action="MaterialServlet" method="post">
-    <input type="hidden" name="id" value="${material.id}">
+    <c:if test="${not empty material.id}">
+        <input type="hidden" name="id" value="${material.id}">
+    </c:if>
 
     <label for="titulo">Título:</label>
     <input type="text" name="titulo" id="titulo" value="${material.titulo}" required>

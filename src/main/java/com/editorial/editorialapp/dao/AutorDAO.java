@@ -23,6 +23,7 @@ public class AutorDAO {
 
         } catch (Exception e) {
             System.err.println("Error al listar autores: " + e.getMessage());
+            e.printStackTrace();
         }
         return lista;
     }
@@ -44,6 +45,7 @@ public class AutorDAO {
 
         } catch (Exception e) {
             System.err.println("Error al obtener autor por ID: " + e.getMessage());
+            e.printStackTrace();
         }
         return autor;
     }
@@ -53,12 +55,20 @@ public class AutorDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Insertando autor: " + autor.getNombre() + " (" + autor.getNacionalidad() + ")");
             ps.setString(1, autor.getNombre());
             ps.setString(2, autor.getNacionalidad());
-            ps.executeUpdate();
+            int filas = ps.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println("✅ Autor insertado correctamente.");
+            } else {
+                System.out.println("⚠️ No se insertó ninguna fila.");
+            }
 
         } catch (Exception e) {
-            System.err.println("Error al insertar autor: " + e.getMessage());
+            System.err.println("❌ Error al insertar autor: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -67,13 +77,15 @@ public class AutorDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Actualizando autor ID: " + autor.getId());
             ps.setString(1, autor.getNombre());
             ps.setString(2, autor.getNacionalidad());
             ps.setInt(3, autor.getId());
             ps.executeUpdate();
 
         } catch (Exception e) {
-            System.err.println("Error al actualizar autor: " + e.getMessage());
+            System.err.println("❌ Error al actualizar autor: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -82,11 +94,14 @@ public class AutorDAO {
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
+            System.out.println("🟡 Eliminando autor ID: " + id);
             ps.setInt(1, id);
             ps.executeUpdate();
 
         } catch (Exception e) {
-            System.err.println("Error al eliminar autor: " + e.getMessage());
+            System.err.println("❌ Error al eliminar autor: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
+
