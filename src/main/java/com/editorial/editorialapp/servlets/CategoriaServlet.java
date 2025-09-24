@@ -35,7 +35,7 @@ public class CategoriaServlet extends HttpServlet {
 
             } else if ("nuevo".equals(action)) {
                 request.setAttribute("categoria", new Categoria());
-                request.getRequestDispatcher("/categoria/formulario.jsp").forward(request, response);
+                request.getRequestDispatcher("/Categoria/formulario.jsp").forward(request, response);
 
             } else {
                 response.sendRedirect("CategoriaServlet?action=listar");
