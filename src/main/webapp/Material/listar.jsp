@@ -24,7 +24,7 @@
             max-width: 900px;
             margin: auto;
         }
-        a.nuevo {
+        a.nuevo, .boton-volver {
             display: inline-block;
             margin-bottom: 20px;
             background-color: #2980b9;
@@ -32,8 +32,9 @@
             padding: 10px 15px;
             border-radius: 4px;
             text-decoration: none;
+            transition: background-color 0.3s ease;
         }
-        a.nuevo:hover {
+        a.nuevo:hover, .boton-volver:hover {
             background-color: #1abc9c;
         }
         table {
@@ -70,12 +71,16 @@
 <body>
 <div class="contenedor">
     <h3>Listado de Materiales</h3>
+
+    <!-- Botón para crear un nuevo material -->
     <a href="MaterialServlet?action=nuevo" class="nuevo">➕ Nuevo Material</a>
 
+    <!-- Si no hay materiales registrados, se muestra un mensaje -->
     <c:if test="${empty materiales}">
         <div class="mensaje-vacio">No hay materiales registrados.</div>
     </c:if>
 
+    <!-- Si hay materiales, se muestra la tabla con los datos -->
     <c:if test="${not empty materiales}">
         <table>
             <tr>
@@ -94,6 +99,7 @@
                     <td>${m.categoria.nombre}</td>
                     <td>${m.autor.nombre}</td>
                     <td>
+                        <!-- Enlaces para editar o eliminar el material -->
                         <a href="MaterialServlet?action=editar&id=${m.id}" class="accion">✏️ Editar</a>
                         <a href="MaterialServlet?action=eliminar&id=${m.id}" class="accion"
                            onclick="return confirm('¿Estás seguro de eliminar este material?')">🗑️ Eliminar</a>
@@ -102,6 +108,9 @@
             </c:forEach>
         </table>
     </c:if>
+
+    <!-- Botón para volver al menú principal -->
+    <a href="index.jsp" class="boton-volver">⬅️ Volver al menú</a>
 </div>
 </body>
 </html>

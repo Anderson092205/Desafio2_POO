@@ -1,12 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" %> <%-- Define el tipo de contenido como HTML con codificación UTF-8 --%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %> <%-- Importa la librería JSTL para usar etiquetas como <c:if> --%>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Categoría</title>
+    <title>Formulario de Categoría</title> <%-- Título que aparece en la pestaña del navegador --%>
     <style>
+        /* Estilos generales para el cuerpo y el formulario */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -59,21 +60,27 @@
     </style>
 </head>
 <body>
-<div class="formulario">
-    <h3>Formulario de Categoría</h3>
+<div class="formulario"> <%-- Contenedor principal del formulario con estilos aplicados --%>
+    <h3>Formulario de Categoría</h3> <%-- Título principal del formulario --%>
 
+    <%-- Si hay un mensaje de error, se muestra en rojo de forma destacada --%>
     <c:if test="${not empty error}">
         <div class="error">${error}</div>
     </c:if>
 
+    <%-- Formulario que envía los datos al servlet CategoriaServlet usando el método POST --%>
     <form action="CategoriaServlet" method="post">
+
+        <%-- Si la categoría ya existe (modo edición), se incluye su ID como campo oculto --%>
         <c:if test="${not empty categoria.id}">
             <input type="hidden" name="id" value="${categoria.id}">
         </c:if>
 
+        <%-- Campo para ingresar o editar el nombre de la categoría --%>
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" value="${categoria.nombre}" required>
 
+        <%-- Botón para guardar los datos ingresados --%>
         <input type="submit" value="Guardar">
     </form>
 </div>

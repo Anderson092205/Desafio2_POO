@@ -1,12 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" %> <%-- Define el tipo de contenido como HTML con codificación UTF-8 --%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %> <%-- Importa la librería JSTL para usar etiquetas como <c:if> y <c:forEach> --%>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Material</title>
+    <title>Formulario de Material</title> <%-- Título que aparece en la pestaña del navegador --%>
     <style>
+        /* Estilos generales para el cuerpo y el formulario */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -58,20 +59,27 @@
     </style>
 </head>
 <body>
-<h3>Formulario de Material</h3>
 
+<h3>Formulario de Material</h3> <%-- Título principal del formulario --%>
+
+<%-- Si hay un mensaje de error, se muestra en rojo de forma destacada --%>
 <c:if test="${not empty error}">
     <div class="error">${error}</div>
 </c:if>
 
+<%-- Formulario que envía los datos al servlet MaterialServlet usando el método POST --%>
 <form action="MaterialServlet" method="post">
+
+    <%-- Si el material ya existe (modo edición), se incluye su ID como campo oculto --%>
     <c:if test="${not empty material.id}">
         <input type="hidden" name="id" value="${material.id}">
     </c:if>
 
+    <%-- Campo para ingresar o editar el título del material --%>
     <label for="titulo">Título:</label>
     <input type="text" name="titulo" id="titulo" value="${material.titulo}" required>
 
+    <%-- Selector para elegir el tipo de material: Libro o Revista --%>
     <label for="tipo">Tipo:</label>
     <select name="tipo" id="tipo" required>
         <option value="">-- Seleccione --</option>
@@ -79,6 +87,7 @@
         <option value="Revista" <c:if test="${material.tipo == 'Revista'}">selected</c:if>>Revista</option>
     </select>
 
+    <%-- Selector para elegir la categoría del material --%>
     <label for="id_categoria">Categoría:</label>
     <select name="id_categoria" id="id_categoria" required>
         <option value="">-- Seleccione --</option>
@@ -89,6 +98,7 @@
         </c:forEach>
     </select>
 
+    <%-- Selector para elegir el autor del material --%>
     <label for="id_autor">Autor:</label>
     <select name="id_autor" id="id_autor" required>
         <option value="">-- Seleccione --</option>
@@ -99,6 +109,7 @@
         </c:forEach>
     </select>
 
+    <%-- Botón para guardar los datos ingresados --%>
     <input type="submit" value="Guardar">
 </form>
 </body>

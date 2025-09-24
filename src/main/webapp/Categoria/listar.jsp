@@ -24,7 +24,7 @@
             text-align: center;
             color: #2c3e50;
         }
-        .boton-nuevo {
+        .boton-nuevo, .boton-volver {
             display: inline-block;
             margin-bottom: 20px;
             background-color: #2980b9;
@@ -34,7 +34,7 @@
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
-        .boton-nuevo:hover {
+        .boton-nuevo:hover, .boton-volver:hover {
             background-color: #1abc9c;
         }
         table {
@@ -70,12 +70,16 @@
 <body>
 <div class="contenedor">
     <h3>Listado de Categorías</h3>
+
+    <!-- Botón para crear una nueva categoría -->
     <a href="CategoriaServlet?action=nuevo" class="boton-nuevo">➕ Nueva Categoría</a>
 
+    <!-- Si no hay categorías, se muestra un mensaje -->
     <c:if test="${empty categorias}">
         <div class="mensaje-vacio">No hay categorías registradas.</div>
     </c:if>
 
+    <!-- Si hay categorías, se muestra la tabla -->
     <c:if test="${not empty categorias}">
         <table>
             <tr>
@@ -88,6 +92,7 @@
                     <td>${c.id}</td>
                     <td>${c.nombre}</td>
                     <td>
+                        <!-- Enlaces para editar o eliminar la categoría -->
                         <a href="CategoriaServlet?action=editar&id=${c.id}" class="accion">✏️ Editar</a>
                         <a href="CategoriaServlet?action=eliminar&id=${c.id}" class="accion"
                            onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">🗑️ Eliminar</a>
@@ -96,6 +101,9 @@
             </c:forEach>
         </table>
     </c:if>
+
+    <!-- Botón para volver al menú principal -->
+    <a href="index.jsp" class="boton-volver">⬅️ Volver al menú</a>
 </div>
 </body>
 </html>
